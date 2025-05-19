@@ -32,18 +32,14 @@ class Customer:
         if not orders:
             return None
         spending = {}
-        max_single_order = {}  # Track the highest single order price per customer
+        max_single_order = {}  
         for order in orders:
             customer = order.customer
             spending[customer] = spending.get(customer, 0) + order.price
             max_single_order[customer] = max(max_single_order.get(customer, 0), order.price)
         
-        # Find the maximum total spending
         max_spending = max(spending.values())
-        # Get all customers with the maximum total spending
         top_customers = [c for c, s in spending.items() if s == max_spending]
-        
-        # If there's a tie, select the customer with the highest single order price
         if len(top_customers) > 1:
             return max(top_customers, key=lambda c: (max_single_order[c], c.name))
         
