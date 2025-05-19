@@ -1,12 +1,10 @@
 
 class Coffee:
-    _all_orders = []  
-
     def __init__(self, name):
         if not isinstance(name, str):
-            raise TypeError("Name must be a string")
+            raise TypeError("Name must be a string.")
         if len(name) < 3:
-            raise ValueError("Name must be at least 3 characters")
+            raise ValueError("Name must be at least 3 characters long.")
         self._name = name
 
     @property
@@ -14,10 +12,11 @@ class Coffee:
         return self._name
 
     def orders(self):
-        return [order for order in Coffee._all_orders if order.coffee == self]
+        from order import Order
+        return [order for order in Order.all() if order.coffee is self]
 
     def customers(self):
-        return list(set(order.customer for order in self.orders()))
+        return list({order.customer for order in self.orders()})
 
     def num_orders(self):
         return len(self.orders())
@@ -27,5 +26,3 @@ class Coffee:
         if not orders:
             return 0
         return sum(order.price for order in orders) / len(orders)
-    
-  
