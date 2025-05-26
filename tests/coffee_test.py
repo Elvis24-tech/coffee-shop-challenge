@@ -20,23 +20,23 @@ def test_coffee_name_validation():
     assert c.name == "Latte"
 
 def test_coffee_orders_and_customers():
-    alice = Customer("Alice")
-    bob = Customer("Bob")
+    waititu = Customer("Waititu")
+    asuva = Customer("Asuva")
     latte = Coffee("Latte")
     mocha = Coffee("Mocha")
-    o1 = alice.create_order(latte, 3.0)
-    o2 = alice.create_order(mocha, 4.0)
-    o3 = bob.create_order(latte, 5.0)
+    o1 = waititu.create_order(latte, 3.0)
+    o2 = waititu.create_order(mocha, 4.0)
+    o3 = asuva.create_order(latte, 5.0)
     assert set(latte.orders()) == {o1, o3}
-    assert set(latte.customers()) == {alice, bob}
+    assert set(latte.customers()) == {waititu, asuva}
 
 def test_num_orders_and_average_price():
-    alice = Customer("Alice")
-    bob = Customer("Bob")
+    waititu = Customer("Waititu")
+    asuva = Customer("Asuva")
     latte = Coffee("Latte")
     assert latte.num_orders() == 0
     assert latte.average_price() == 0
-    alice.create_order(latte, 4.0)
-    bob.create_order(latte, 6.0)
+    waititu.create_order(latte, 4.0)
+    asuva.create_order(latte, 6.0)
     assert latte.num_orders() == 2
     assert latte.average_price() == 5.0
